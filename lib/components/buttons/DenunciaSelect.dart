@@ -1,3 +1,4 @@
+import 'package:FarmaCode/MainScreens/efectosPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:FarmaCode/MainScreens/DenunciaPage.dart';
@@ -16,7 +17,7 @@ class DenunciaSelect extends StatelessWidget {
             "#3D8BEF", "Cancelar", false, ScanMode.QR);
 
         print("=======================> ${barcodeScanRes}"); // escaner
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DenunciaPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => efectosPage()));
 
 
       },
