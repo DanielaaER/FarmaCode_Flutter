@@ -20,8 +20,7 @@ class menuQR extends StatelessWidget {
 
         print("=======================> ${barcodeScanRes}"); // escaner
         Navigator.push(context, MaterialPageRoute(builder: (context) => medicamentoPage(
-          qr: (barcodeScanRes),
-
+          qr: barcodeScanRes,
         )));
 
 

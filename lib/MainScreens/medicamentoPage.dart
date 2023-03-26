@@ -11,6 +11,7 @@ import 'package:FarmaCode/components/buttons/Denuncia.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 String _nombre="";
 String _concentracion="";
 String _farmacia="";
@@ -20,30 +21,21 @@ String _descripcion="";
 String _dosis="";
 String _qr="";
 class medicamentoPage extends StatefulWidget {
-  String? qr;
-
-
-  medicamentoPage({ this.qr})
-
-  final _url = Uri.http('http//:192.168.10.120/api/medicina/${qr}');
-
+  final String? qr;
+  medicamentoPage({Key? key, this.qr}):super (key:key)
 
   @override
-  void initState() {
-
-    recibirString();
-    super.initState();
-  }
-  @override
-  State<medicamentoPage> createState() => _medicamentoPageState();
+  State<medicamentoPage> createState() => _medicamentoPageState(this.qr);
 }
 
 
 class _medicamentoPageState extends State<medicamentoPage> {
   bool _showPassword = false;
-
-
-
+  String? qr="";
+  _medicamentoPageState(String? qr){
+    this.qr = qr;
+  }
+  final _url = Uri.http('http//:192.168.10.120/api/medicina/${qr}');
 
   Future<String> recibirString() async {
     final respuesta = await http.get(_url);
@@ -64,6 +56,12 @@ class _medicamentoPageState extends State<medicamentoPage> {
     }else{
       throw Exception("Fallo");
     }
+  }
+  @override
+  void initState() {
+
+    recibirString();
+    super.initState();
   }
 
   @override
