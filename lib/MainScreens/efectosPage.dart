@@ -1,9 +1,10 @@
+import 'package:FarmaCode/MainScreens/confReportePage.dart';
 import 'package:FarmaCode/components/fields/Denuncias/FieldHora.dart';
 import 'package:FarmaCode/components/fields/Denuncias/fieldFecha.dart';
 import 'package:FarmaCode/components/fields/Efectos/FielDenuncia.dart';
 import 'package:flutter/material.dart';
 
-import '../components/buttons/Denuncia.dart';
+import '../components/buttons/hero.dart';
 import '../components/fields/Efectos/FieldCantidad.dart';
 import '../components/fields/Efectos/FieldDosis.dart';
 
@@ -45,8 +46,7 @@ class _efectosPageState extends State<efectosPage> {
                 SizedBox(
                   height: 30,
                 ),
-
-                Denuncia(),
+                hero(),
               ]),
             )),
       ),

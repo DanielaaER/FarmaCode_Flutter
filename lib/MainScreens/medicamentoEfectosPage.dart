@@ -1,3 +1,4 @@
+import 'package:FarmaCode/MainScreens/efectosPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -12,6 +13,8 @@ import 'package:FarmaCode/components/buttons/efectos.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'incorrectoPage.dart';
+
 
 String _nombre="";
 String _concentracion="";
@@ -21,9 +24,11 @@ String _foto="";
 String _descripcion="";
 String _dosis="";
 String _qr="";
+
+
 class medicamentoEfectosPage extends StatefulWidget {
   String _qr="";
-  medicamentoEfectosPage({required String qr}){
+  medicamentoEfectosPagePage({required String qr}){
     this._qr = qr;
   }
 
@@ -35,39 +40,39 @@ class medicamentoEfectosPage extends StatefulWidget {
 class _medicamentoEfectosPageState extends State<medicamentoEfectosPage> {
   bool _showPassword = false;
   String _qr="";
-  _medicamentoEfectosPageState(String qr){
+
+  _medicamentoEfectosPageState(String qr);
+  _medicamentoPageState(String qr){
+    print ("qr recibido"+qr);
     this._qr = qr;
+    recibirString(_qr);
   }
+  Future<String> recibirString(qr) async {
+    final respuesta = await http.get(Uri.http('192.168.10.43:9090','/api/medicina/${qr}', {qr : '${qr}'}));
 
-  Future<String> recibirString() async {
-    final respuesta = await http.get(Uri.http('http//:192.168.10.120/api/medicina/${this._qr}'));
-
-    print(respuesta);
 
     if(respuesta.statusCode==200){
-
-      print( respuesta.body.toString());
       setState(() {
         var parsedJson = jsonDecode(respuesta.body);
+        print(parsedJson);
         _nombre = parsedJson["nombre"];
         _concentracion = parsedJson["tipo"];
         _dosis = parsedJson["dosis"];
         _farmacia = parsedJson["marca"];
         _efectos = parsedJson["efectos"];
         _foto = parsedJson["foto"];
-        _descripcion = parsedJson["descripcion"];
+        _descripcion = parsedJson["descricion"];
       });
+      print("variables \n"+ _foto);
       return respuesta.body;
     }else{
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => incorrectoPage()));
+
       throw Exception("Fallo");
     }
   }
-  @override
-  void initState() {
 
-    recibirString();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,55 +80,51 @@ class _medicamentoEfectosPageState extends State<medicamentoEfectosPage> {
       child: Scaffold(
         body: SingleChildScrollView(
             child: Container(
-          height: MediaQuery.of(context).size.height,
-          margin: EdgeInsets.all(30),
-          child: Column(children: [
-            SizedBox(
-              height: 50,
-            ),
-            Image.asset(
-              _foto, //aqui agregar imagen medicina
-
-              height: 180,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FieldNombre(
-                 nombre: _nombre,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FieldConcentracion(
-              concentracion: _concentracion,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FieldFarmaceutica(
-              farmacia: _farmacia,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FieldAdministracion(
-              administracion: _descripcion,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FieldDosis(
-              dosis : _dosis,
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FieldEfectos(
-              efectos: _efectos,
-            ), SizedBox(
-              height: 50,
-            ),
+              height: MediaQuery.of(context).size.height,
+              margin: EdgeInsets.all(30),
+              child: Column(children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Image.network(_foto, width: 200),
+                SizedBox(
+                  height: 50,
+                ),
+                FieldNombre(
+                  nombre: _nombre,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                FieldConcentracion(
+                  concentracion: _concentracion,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                FieldFarmaceutica(
+                  farmacia: _farmacia,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                FieldAdministracion(
+                  administracion: _descripcion,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                FieldDosis(
+                  dosis : _dosis,
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                FieldEfectos(
+                  efectos: _efectos,
+                ), SizedBox(
+                  height: 50,
+                ),
             efectos()
           ]),
         )),

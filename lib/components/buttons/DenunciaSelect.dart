@@ -6,6 +6,7 @@ import 'package:FarmaCode/MainScreens/medicamentoEfectosPage.dart';
 
 import '../../MainScreens/homePage.dart';
 import '../../MainScreens/medicamentoEfectosPage.dart';
+import '../../MainScreens/medicamentoPage.dart';
 
 class DenunciaSelect extends StatelessWidget {
   @override
@@ -17,16 +18,15 @@ class DenunciaSelect extends StatelessWidget {
 
         String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
             "#3D8BEF", "Cancelar", false, ScanMode.QR);
-        try {
-          print("=======================> ${barcodeScanRes}"); // escaner
-          Navigator.push(context, MaterialPageRoute(
-              builder: (context) => medicamentoEfectosPage(qr: '',)));
-        }catch(e) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => incorrectoPage()));
-        }
+
+        print("=======================> ${barcodeScanRes}"); // escaner
+
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => medicamentoPage(qr: barcodeScanRes,)));
+
 
       },
+
       child: Text(
         "Denuncia un efecto secundario",
         style: TextStyle(fontSize: 20),

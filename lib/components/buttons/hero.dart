@@ -5,16 +5,17 @@ import 'package:FarmaCode/components/buttons/menuQR.dart';
 import 'package:flutter/material.dart';
 
 import '../../MainScreens/menuPage.dart';
+import 'home.dart';
 
-class Denuncia extends StatelessWidget {
+class hero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DenunciaPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => confReportePage()));
       },
       child: Text(
-        "Reportar Irregularidad",
+        "Enviar",
         style: TextStyle(fontSize: 20),
       ),
       style: ElevatedButton.styleFrom(

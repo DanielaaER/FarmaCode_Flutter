@@ -1,3 +1,5 @@
+import 'package:FarmaCode/MainScreens/confReportePage.dart';
+import 'package:FarmaCode/components/buttons/hero.dart';
 import 'package:FarmaCode/components/fields/Denuncias/FielDenuncia.dart';
 import 'package:FarmaCode/components/fields/Denuncias/FieldHora.dart';
 import 'package:FarmaCode/components/fields/Denuncias/fielCiudar.dart';
@@ -60,7 +62,7 @@ class _DenunciaPageState extends State<DenunciaPage> {
             SizedBox(
               height: 30,
             ),
-            Denuncia(),
+            hero(),
           ]),
         )),
       ),
