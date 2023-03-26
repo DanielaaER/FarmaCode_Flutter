@@ -10,7 +10,7 @@ class menuRFID extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => medicamentoPage()));
+            context, MaterialPageRoute(builder: (context) => medicamentoPage(qr: "")));
       },
       child: Text(
         "Escanear RFID",

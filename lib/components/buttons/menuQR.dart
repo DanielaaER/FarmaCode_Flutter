@@ -19,7 +19,10 @@ class menuQR extends StatelessWidget {
             "#3D8BEF", "Cancelar", false, ScanMode.QR);
 
         print("=======================> ${barcodeScanRes}"); // escaner
-        Navigator.push(context, MaterialPageRoute(builder: (context) => medicamentoPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => medicamentoPage(
+          qr: (barcodeScanRes),
+
+        )));
 
 
       },

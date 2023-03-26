@@ -9,15 +9,62 @@ import '../components/fields/medicamento/fieldFarmaceutica.dart';
 import '../components/fields/medicamento/fieldNombre.dart';
 import 'package:FarmaCode/components/buttons/Denuncia.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+String _nombre="";
+String _concentracion="";
+String _farmacia="";
+String _efectos="";
+String _foto="";
+String _descripcion="";
+String _dosis="";
+String _qr="";
 class medicamentoPage extends StatefulWidget {
-  const medicamentoPage({super.key});
+  String? qr;
 
+
+  medicamentoPage({ this.qr})
+
+  final _url = Uri.http('http//:192.168.10.120/api/medicina/${qr}');
+
+
+  @override
+  void initState() {
+
+    recibirString();
+    super.initState();
+  }
   @override
   State<medicamentoPage> createState() => _medicamentoPageState();
 }
 
+
 class _medicamentoPageState extends State<medicamentoPage> {
   bool _showPassword = false;
+
+
+
+
+  Future<String> recibirString() async {
+    final respuesta = await http.get(_url);
+    if(respuesta.statusCode==200){
+
+      print( respuesta.body.toString());
+      setState(() {
+        var parsedJson = jsonDecode(respuesta.body);
+        _nombre = parsedJson["nombre"];
+        _concentracion = parsedJson["tipo"];
+        _dosis = parsedJson["dosis"];
+        _farmacia = parsedJson["marca"];
+        _efectos = parsedJson["efectos"];
+        _foto = parsedJson["foto"];
+        _descripcion = parsedJson["descripcion"];
+      });
+      return respuesta.body;
+    }else{
+      throw Exception("Fallo");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,33 +79,46 @@ class _medicamentoPageState extends State<medicamentoPage> {
               height: 50,
             ),
             Image.asset(
-              "assets/images/Logo_FarmaCode.png", //aqui agregar imagen medicina
+              _foto, //aqui agregar imagen medicina
+
               height: 180,
             ),
             SizedBox(
               height: 50,
             ),
-            FieldNombre(),
+            FieldNombre(
+                 nombre: _nombre,
+            ),
             SizedBox(
               height: 50,
             ),
-            FieldConcentracion(),
+            FieldConcentracion(
+              concentracion: _concentracion,
+            ),
             SizedBox(
               height: 50,
             ),
-            FieldFarmaceutica(),
+            FieldFarmaceutica(
+              farmacia: _farmacia,
+            ),
             SizedBox(
               height: 50,
             ),
-            FieldAdministracion(),
+            FieldAdministracion(
+              administracion: _descripcion,
+            ),
             SizedBox(
               height: 50,
             ),
-            FieldDosis(),
+            FieldDosis(
+              dosis : _dosis,
+            ),
             SizedBox(
               height: 50,
             ),
-            FieldEfectos(), SizedBox(
+            FieldEfectos(
+              efectos: _efectos,
+            ), SizedBox(
               height: 50,
             ),
             Denuncia()
