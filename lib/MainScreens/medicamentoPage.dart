@@ -21,24 +21,25 @@ String _descripcion="";
 String _dosis="";
 String _qr="";
 class medicamentoPage extends StatefulWidget {
-  final String? qr;
-  medicamentoPage({Key? key, this.qr}):super (key:key)
+  String _qr="";
+  medicamentoPage(String qr){
+    this._qr = qr;
+  }
 
   @override
-  State<medicamentoPage> createState() => _medicamentoPageState(this.qr);
+  State<medicamentoPage> createState() => _medicamentoPageState(_qr);
 }
 
 
 class _medicamentoPageState extends State<medicamentoPage> {
   bool _showPassword = false;
-  String? qr="";
-  _medicamentoPageState(String? qr){
-    this.qr = qr;
+  String _qr="";
+  _medicamentoPageState(String qr){
+    this._qr = qr;
   }
-  final _url = Uri.http('http//:192.168.10.120/api/medicina/${qr}');
 
   Future<String> recibirString() async {
-    final respuesta = await http.get(_url);
+    final respuesta = await http.get(Uri.http('http//:192.168.10.120/api/medicina/${this._qr}'));
     if(respuesta.statusCode==200){
 
       print( respuesta.body.toString());
