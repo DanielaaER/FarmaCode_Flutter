@@ -1,3 +1,5 @@
+import 'package:FarmaCode/MainScreens/DenunciaPage.dart';
+import 'package:FarmaCode/MainScreens/confReportePage.dart';
 import 'package:FarmaCode/MainScreens/incorrectoPage.dart';
 import 'package:FarmaCode/components/buttons/menuQR.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,7 @@ class Denuncia extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => incorrectoPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => confReportePage()));
       },
       child: Text(
         "Reportar Irregularidad",
