@@ -1,4 +1,5 @@
 import 'package:FarmaCode/MainScreens/medicamentoPage.dart';
+import 'package:FarmaCode/MainScreens/incorrectoPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -18,10 +19,10 @@ class menuQR extends StatelessWidget {
         String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
             "#3D8BEF", "Cancelar", false, ScanMode.QR);
 
-        print("=======================> ${barcodeScanRes}"); // escaner
-        Navigator.push(context, MaterialPageRoute(builder: (context) => medicamentoPage(
-          qr: barcodeScanRes,
-        )));
+          print("=======================> ${barcodeScanRes}"); // escaner
+
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => medicamentoPage(qr: barcodeScanRes,)));
 
 
       },

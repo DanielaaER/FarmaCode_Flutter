@@ -7,12 +7,11 @@ import '../components/fields/medicamento/fieldDosis.dart';
 import '../components/fields/medicamento/fieldEfectos.dart';
 import '../components/fields/medicamento/fieldFarmaceutica.dart';
 import '../components/fields/medicamento/fieldNombre.dart';
-import 'package:FarmaCode/components/buttons/Denuncia.dart';
+import 'package:FarmaCode/components/buttons/efectos.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'incorrectoPage.dart';
 
 String _nombre="";
 String _concentracion="";
@@ -22,54 +21,53 @@ String _foto="";
 String _descripcion="";
 String _dosis="";
 String _qr="";
-class medicamentoPage extends StatefulWidget {
+class medicamentoEfectosPage extends StatefulWidget {
   String _qr="";
-  medicamentoPage({required String qr}){
+  medicamentoEfectosPage({required String qr}){
     this._qr = qr;
   }
 
   @override
-  State<medicamentoPage> createState() => _medicamentoPageState(_qr);
+  State<medicamentoEfectosPage> createState() => _medicamentoEfectosPageState(_qr);
 }
 
 
-class _medicamentoPageState extends State<medicamentoPage> {
+class _medicamentoEfectosPageState extends State<medicamentoEfectosPage> {
   bool _showPassword = false;
   String _qr="";
-  _medicamentoPageState(String qr){
-    print ("qr recibido"+qr);
+  _medicamentoEfectosPageState(String qr){
     this._qr = qr;
-    recibirString(_qr);
   }
-  Future<String> recibirString(qr) async {
-    final respuesta = await http.get(Uri.http('192.168.10.43:9090','/api/medicina/${qr}', {qr : '${qr}'}));
 
+  Future<String> recibirString() async {
+    final respuesta = await http.get(Uri.http('http//:192.168.10.120/api/medicina/${this._qr}'));
+
+    print(respuesta);
 
     if(respuesta.statusCode==200){
+
+      print( respuesta.body.toString());
       setState(() {
         var parsedJson = jsonDecode(respuesta.body);
-        print(parsedJson);
         _nombre = parsedJson["nombre"];
         _concentracion = parsedJson["tipo"];
         _dosis = parsedJson["dosis"];
         _farmacia = parsedJson["marca"];
         _efectos = parsedJson["efectos"];
         _foto = parsedJson["foto"];
-        _descripcion = parsedJson["descricion"];
+        _descripcion = parsedJson["descripcion"];
       });
-      print("variables \n"+ _foto);
       return respuesta.body;
     }else{
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => incorrectoPage()));
-
       throw Exception("Fallo");
     }
   }
+  @override
+  void initState() {
 
-
-
-
+    recibirString();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +81,11 @@ class _medicamentoPageState extends State<medicamentoPage> {
             SizedBox(
               height: 50,
             ),
-            Image.network(_foto, width: 200),
+            Image.asset(
+              _foto, //aqui agregar imagen medicina
+
+              height: 180,
+            ),
             SizedBox(
               height: 50,
             ),
@@ -122,7 +124,7 @@ class _medicamentoPageState extends State<medicamentoPage> {
             ), SizedBox(
               height: 50,
             ),
-            Denuncia()
+            efectos()
           ]),
         )),
       ),

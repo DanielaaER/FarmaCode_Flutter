@@ -9,7 +9,7 @@ class fieldNota extends StatelessWidget {
       child: TextFormField(
         keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
-            labelText: "nota",
+            labelText: "dosis",
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),

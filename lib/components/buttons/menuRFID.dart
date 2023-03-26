@@ -1,4 +1,5 @@
 import 'package:FarmaCode/MainScreens/medicamentoPage.dart';
+import 'package:FarmaCode/MainScreens/incorrectoPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -9,9 +10,16 @@ class menuRFID extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => medicamentoPage(qr: "")));
-      },
+       try{
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => medicamentoPage(qr: "")));
+        }catch(e) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => incorrectoPage()));
+    }
+
+  },
       child: Text(
         "Escanear RFID",
         style: TextStyle(fontSize: 20),

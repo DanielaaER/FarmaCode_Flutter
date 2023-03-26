@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class fieldEstado extends StatelessWidget {
+class FieldCantidad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class fieldEstado extends StatelessWidget {
       child: TextFormField(
         keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
-          labelText: "estado",
+          labelText: "Cantidad",
           border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),

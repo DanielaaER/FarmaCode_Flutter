@@ -1,14 +1,11 @@
-import 'package:FarmaCode/components/fields/Denuncias/FielDenuncia.dart';
 import 'package:FarmaCode/components/fields/Denuncias/FieldHora.dart';
-import 'package:FarmaCode/components/fields/Denuncias/fielCiudar.dart';
-import 'package:FarmaCode/components/fields/Denuncias/fieldEstado.dart';
-import 'package:FarmaCode/components/fields/Denuncias/fieldFarmacia.dart';
 import 'package:FarmaCode/components/fields/Denuncias/fieldFecha.dart';
+import 'package:FarmaCode/components/fields/Efectos/FielDenuncia.dart';
 import 'package:flutter/material.dart';
 
 import '../components/buttons/Denuncia.dart';
-import '../components/fields/Denuncias/fieldSSucursal.dart';
-import '../components/fields/Denuncias/fieldNota.dart';
+import '../components/fields/Efectos/FieldCantidad.dart';
+import '../components/fields/Efectos/FieldDosis.dart';
 
 
 class efectosPage extends StatefulWidget {
@@ -28,9 +25,13 @@ class _efectosPageState extends State<efectosPage> {
               height: MediaQuery.of(context).size.height,
               margin: EdgeInsets.all(30),
               child: Column(children: [
-                FielDenuncias(),
+                FieldEfectos(),
                 SizedBox(
                   height: 50,
+                ),
+                FieldDosis(),
+                SizedBox(
+                  height: 30,
                 ),
                 fieldFecha(),
                 SizedBox(
@@ -40,26 +41,11 @@ class _efectosPageState extends State<efectosPage> {
                 SizedBox(
                   height: 30,
                 ),
-                fieldEstado(),
+                FieldCantidad(),
                 SizedBox(
                   height: 30,
                 ),
-                fielCiudad(),
-                SizedBox(
-                  height: 30,
-                ),
-                fieldFamrmacia(),
-                SizedBox(
-                  height: 30,
-                ),
-                fieldSucursal(),
-                SizedBox(
-                  height: 30,
-                ),
-                fieldNota(),
-                SizedBox(
-                  height: 30,
-                ),
+
                 Denuncia(),
               ]),
             )),

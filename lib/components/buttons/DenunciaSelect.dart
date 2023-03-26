@@ -1,9 +1,11 @@
 import 'package:FarmaCode/MainScreens/efectosPage.dart';
+import 'package:FarmaCode/MainScreens/incorrectoPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:FarmaCode/MainScreens/DenunciaPage.dart';
+import 'package:FarmaCode/MainScreens/medicamentoEfectosPage.dart';
 
 import '../../MainScreens/homePage.dart';
+import '../../MainScreens/medicamentoEfectosPage.dart';
 
 class DenunciaSelect extends StatelessWidget {
   @override
@@ -15,10 +17,14 @@ class DenunciaSelect extends StatelessWidget {
 
         String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
             "#3D8BEF", "Cancelar", false, ScanMode.QR);
-
-        print("=======================> ${barcodeScanRes}"); // escaner
-        Navigator.push(context, MaterialPageRoute(builder: (context) => efectosPage()));
-
+        try {
+          print("=======================> ${barcodeScanRes}"); // escaner
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => medicamentoEfectosPage(qr: '',)));
+        }catch(e) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => incorrectoPage()));
+        }
 
       },
       child: Text(

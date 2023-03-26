@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class fieldSucursal extends StatelessWidget {
+class FieldSintomas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class fieldSucursal extends StatelessWidget {
       child: TextFormField(
         keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
-          labelText: "Sucursal",
+          labelText: "Sintomas",
           border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
